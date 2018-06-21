@@ -37,7 +37,7 @@ const Nav = styled.nav`
 `
 const LogoText = styled.div`
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 32px;
 `
 const Text = styled.div`
@@ -122,7 +122,7 @@ const Card = styled.div`
 `
 
 const CardHeader = styled.div`
-  font-weight: 700;
+  font-weight: 600;
   font-size: 22px;
   line-height: 1.5;
 `
