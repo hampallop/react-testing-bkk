@@ -3,9 +3,7 @@ import styled from 'react-emotion'
 import { Redirect } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import { Card, CardHeader, CardBody } from '../common/Card'
-import Form from '../common/Form'
-import Button from '../common/Button'
-import { Input, Label, ErrorMessage } from '../common/Inupt'
+import SignupForm from '../components/SignupForm'
 import { AuthContextConsumer } from '../context/auth'
 
 const widthSize = '360px'
@@ -19,14 +17,8 @@ const Header = styled(CardHeader)`
   padding-top: 24px;
   line-height: 1.5;
 `
-const FieldContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin-bottom: 16px;
-`
 
-function SignupForm() {
+function Signup() {
   return (
     <AuthContextConsumer>
       {({ user, signup, error }) =>
@@ -39,35 +31,7 @@ function SignupForm() {
               <Card>
                 <Header>Sign up</Header>
                 <CardBody>
-                  <Form
-                    onSubmit={(e) => {
-                      e.preventDefault()
-                      const {
-                        username,
-                        password,
-                        confirmPassword,
-                      } = e.target.elements
-                      const auth = {
-                        username: username.value,
-                        password: password.value,
-                        confirmPassword: confirmPassword.value,
-                      }
-                      signup(auth)
-                    }}
-                  >
-                    <FieldContainer>
-                      <Label htmlFor="username">Username</Label>
-                      <Input id="username" type="text" />
-                      <Label htmlFor="password">Password</Label>
-                      <Input id="password" type="password" />
-                      <Label htmlFor="confirmPassword">Confirm Password</Label>
-                      <Input id="confirmPassword" type="password" />
-                      {error && <ErrorMessage>{error.message}</ErrorMessage>}
-                    </FieldContainer>
-                    <Button stretch type="submit">
-                      Sign up
-                    </Button>
-                  </Form>
+                  <SignupForm onSubmit={signup} error={error} />
                 </CardBody>
               </Card>
             </Layout>
@@ -78,4 +42,4 @@ function SignupForm() {
   )
 }
 
-export default SignupForm
+export default Signup
