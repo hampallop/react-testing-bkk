@@ -29,6 +29,8 @@
     "babel-plugin-emotion": "^9.2.0",
     "cypress": "^3.0.1",
     "cypress-testing-library": "^2.2.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.9.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-hamcompe": "^1.0.11",

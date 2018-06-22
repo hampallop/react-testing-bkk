@@ -73,7 +73,6 @@ class Home extends Component {
     })
   }
   render() {
-    console.log('this.state', this.state)
     const { posts, joinList } = this.state
     return (
       <div>

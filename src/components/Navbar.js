@@ -61,7 +61,9 @@ function Navbar() {
               {user != null ? (
                 <Fragment>
                   <NavItem>
-                    <UsernameText>{user.username}</UsernameText>
+                    <UsernameText data-testid="username-display">
+                      {user.username}
+                    </UsernameText>
                   </NavItem>
                   <NavItem>
                     <LogoutText onClick={logout}>Logout</LogoutText>
