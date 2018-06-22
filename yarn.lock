@@ -2235,6 +2235,12 @@ currently-unhandled@^0.4.1:
   dependencies:
     array-find-index "^1.0.1"
 
+cypress-testing-library@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/cypress-testing-library/-/cypress-testing-library-2.2.0.tgz#9a33df426b8f9815da5e771e1ba5602919c71e99"
+  dependencies:
+    dom-testing-library "^2.0.0"
+
 cypress@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/cypress/-/cypress-3.0.1.tgz#6a8938ce8a551e4ae1bd5fb2ceab038d4ad39c4d"
@@ -2496,6 +2502,15 @@ dom-serializer@0:
   dependencies:
     domelementtype "~1.1.1"
     entities "~1.1.1"
+
+dom-testing-library@^2.0.0:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/dom-testing-library/-/dom-testing-library-2.6.1.tgz#ec97192d3ddbc026809d1377eafc22eabdc372d3"
+  dependencies:
+    jest-dom "^1.0.0"
+    mutationobserver-shim "^0.3.2"
+    pretty-format "^22.4.3"
+    wait-for-expect "^0.4.0"
 
 dom-testing-library@^2.3.1:
   version "2.5.0"
@@ -2798,6 +2813,12 @@ eslint-module-utils@^2.1.1, eslint-module-utils@^2.2.0:
   dependencies:
     debug "^2.6.8"
     pkg-dir "^1.0.0"
+
+eslint-plugin-cypress@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-cypress/-/eslint-plugin-cypress-2.0.1.tgz#647e942cacbfd71b0f1a1ed6978472fbd475c60a"
+  dependencies:
+    globals "^11.0.1"
 
 eslint-plugin-flowtype@2.39.1:
   version "2.39.1"
