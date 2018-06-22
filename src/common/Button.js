@@ -2,6 +2,9 @@ import styled from 'react-emotion'
 import { colors, radiusSize, boxShadow } from '../shared/style'
 
 const Button = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: ${colors.primaryBlue};
   min-height: 36px;
   min-width: 100px;

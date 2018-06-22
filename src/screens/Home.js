@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from 'react-emotion'
 import Navbar from '../components/Navbar'
 import TripCard from '../components/TripCard'
+import api from '../utils/api'
 
 import {
   colors,
@@ -58,8 +59,22 @@ const TripsLayout = styled.div`
   grid-row-gap: 48px;
 `
 
-class App extends Component {
+class Home extends Component {
+  static defaultProps = {
+    api,
+  }
+  state = { posts: [], joinList: [] }
+  componentDidMount() {
+    this.props.api.post.get().then((posts) => {
+      this.setState({ posts })
+    })
+    this.props.api.joinList.get().then((list) => {
+      this.setState({ joinList: list.map(item => item.postId) })
+    })
+  }
   render() {
+    console.log('this.state', this.state)
+    const { posts, joinList } = this.state
     return (
       <div>
         <Navbar />
@@ -71,30 +86,16 @@ class App extends Component {
             </aside>
             <div>
               <TripsLayout>
-                <TripCard
-                  imgUrl="https://images.unsplash.com/photo-1512491289751-2ab5001e9b48?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e8eaf38afc1e027ce583aa69558c0031&auto=format&fit=crop&w=2850&q=80"
-                  title="Tokyo - Kyoto"
-                  durations="8"
-                  cost="86k"
-                />
-                <TripCard
-                  imgUrl="https://images.unsplash.com/photo-1497302347632-904729bc24aa?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=144d48440ee329f1d475ac5db69d66fc&auto=format&fit=crop&w=1350&q=80"
-                  title="Colorado"
-                  durations="8"
-                  cost="86k"
-                />
-                <TripCard
-                  imgUrl="https://images.unsplash.com/photo-1453747063559-36695c8771bd?ixlib=rb-0.3.5&s=34113baef0783b0b3fb1dafee3c7dd34&auto=format&fit=crop&w=1350&q=80"
-                  title="Venice, Italy"
-                  durations="8"
-                  cost="86k"
-                />
-                <TripCard
-                  imgUrl="https://images.unsplash.com/photo-1508672019048-805c876b67e2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bd27a515bce2dade58bc288fde28f290&auto=format&fit=crop&w=1393&q=80"
-                  title="Königssee, Schönau am Königssee, Germany"
-                  durations="8"
-                  cost="86k"
-                />
+                {posts.map(post => (
+                  <TripCard
+                    key={post.id}
+                    imgUrl={post.imgUrl}
+                    title={post.title}
+                    durations={post.durations}
+                    cost={post.cost}
+                    joined={joinList.indexOf(post.id) >= 0}
+                  />
+                ))}
               </TripsLayout>
             </div>
           </MainLayout>
@@ -104,4 +105,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default Home

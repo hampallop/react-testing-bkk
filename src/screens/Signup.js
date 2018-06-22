@@ -1,10 +1,12 @@
 import React from 'react'
 import styled from 'react-emotion'
+import { Redirect } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import { Card, CardHeader, CardBody } from '../common/Card'
 import Form from '../common/Form'
 import Button from '../common/Button'
-import { Input, Label } from '../common/Inupt'
+import { Input, Label, ErrorMessage } from '../common/Inupt'
+import { AuthContextConsumer } from '../context/auth'
 
 const widthSize = '360px'
 const Layout = styled.div`
@@ -24,30 +26,56 @@ const FieldContainer = styled.div`
   margin-bottom: 16px;
 `
 
-export default function () {
+function SignupForm() {
   return (
-    <div>
-      <Navbar />
-      <Layout>
-        <Card>
-          <Header>Sign up</Header>
-          <CardBody>
-            <Form>
-              <FieldContainer>
-                <Label htmlFor="username">Username</Label>
-                <Input id="username" type="text" />
-                <Label htmlFor="password">Password</Label>
-                <Input id="password" type="password" />
-                <Label htmlFor="confirm-password">Confirm Password</Label>
-                <Input id="confirm-password" type="password" />
-              </FieldContainer>
-              <Button stretch type="submit">
-                Sign up
-              </Button>
-            </Form>
-          </CardBody>
-        </Card>
-      </Layout>
-    </div>
+    <AuthContextConsumer>
+      {({ user, signup, error }) =>
+        (user != null ? (
+          <Redirect to="/" />
+        ) : (
+          <div>
+            <Navbar />
+            <Layout>
+              <Card>
+                <Header>Sign up</Header>
+                <CardBody>
+                  <Form
+                    onSubmit={(e) => {
+                      e.preventDefault()
+                      const {
+                        username,
+                        password,
+                        confirmPassword,
+                      } = e.target.elements
+                      const auth = {
+                        username: username.value,
+                        password: password.value,
+                        confirmPassword: confirmPassword.value,
+                      }
+                      signup(auth)
+                    }}
+                  >
+                    <FieldContainer>
+                      <Label htmlFor="username">Username</Label>
+                      <Input id="username" type="text" />
+                      <Label htmlFor="password">Password</Label>
+                      <Input id="password" type="password" />
+                      <Label htmlFor="confirmPassword">Confirm Password</Label>
+                      <Input id="confirmPassword" type="password" />
+                      {error && <ErrorMessage>{error.message}</ErrorMessage>}
+                    </FieldContainer>
+                    <Button stretch type="submit">
+                      Sign up
+                    </Button>
+                  </Form>
+                </CardBody>
+              </Card>
+            </Layout>
+          </div>
+        ))
+      }
+    </AuthContextConsumer>
   )
 }
+
+export default SignupForm

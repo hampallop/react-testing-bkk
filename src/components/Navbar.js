@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import styled from 'react-emotion'
 import { Link } from 'react-router-dom'
+import { AuthContextConsumer } from '../context/auth'
 import { colors, contentWidth, boxShadow, paddingSize } from '../shared/style'
 
 const Text = styled.div`
@@ -39,23 +40,48 @@ const NavContainer = styled.div`
 const NavItemContainer = styled.div`
   margin-left: auto;
 `
+const UsernameText = styled.span`
+  font-weight: 500;
+`
+const LogoutText = styled.span`
+  font-weight: 500;
+  cursor: pointer;
+`
+
 function Navbar() {
   return (
-    <Nav>
-      <NavContainer>
-        <Link to="/">
-          <LogoText>Journey Blog</LogoText>
-        </Link>
-        <NavItemContainer>
-          <NavItem>
-            <LinkText href="/signup">Sign up</LinkText>
-          </NavItem>
-          <NavItem>
-            <LinkText href="/login">Login</LinkText>
-          </NavItem>
-        </NavItemContainer>
-      </NavContainer>
-    </Nav>
+    <AuthContextConsumer>
+      {({ user, logout }) => (
+        <Nav>
+          <NavContainer>
+            <Link to="/">
+              <LogoText>Journey Blog</LogoText>
+            </Link>
+            <NavItemContainer>
+              {user != null ? (
+                <Fragment>
+                  <NavItem>
+                    <UsernameText>{user.username}</UsernameText>
+                  </NavItem>
+                  <NavItem>
+                    <LogoutText onClick={logout}>Logout</LogoutText>
+                  </NavItem>
+                </Fragment>
+              ) : (
+                <Fragment>
+                  <NavItem>
+                    <LinkText href="/signup">Sign up</LinkText>
+                  </NavItem>
+                  <NavItem>
+                    <LinkText href="/login">Login</LinkText>
+                  </NavItem>
+                </Fragment>
+              )}
+            </NavItemContainer>
+          </NavContainer>
+        </Nav>
+      )}
+    </AuthContextConsumer>
   )
 }
 

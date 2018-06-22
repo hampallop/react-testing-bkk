@@ -1,5 +1,7 @@
 import React from 'react'
-import styled from 'react-emotion'
+import styled, { css } from 'react-emotion'
+import { Link } from 'react-router-dom'
+import { AuthContextConsumer } from '../context/auth'
 
 import { colors, boxShadow, paddingSize, radiusSize } from '../shared/style'
 import { Card, CardHeader, CardBody, CardFooter } from '../common/Card'
@@ -41,23 +43,44 @@ const Divider = styled.div`
   margin-top: 16px;
   border-bottom: 1px solid ${colors.grey};
 `
-const JoinButton = styled.button`
+const joinButtonStyle = props => css`
   display: flex;
   align-items: center;
   justify-content: center;
   height: 40px;
   width: 40px;
-  background: ${colors.primaryBlue};
-  color: #fff;
   border: none;
   border-radius: 50%;
   box-shadow: 0 8px 30px -11px ${colors.primaryBlue};
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
+  transition: all 0.3s ease;
+
+  background: ${props.joined ? '#fff' : colors.primaryBlue};
+  color: ${props.joined ? colors.primaryBlue : '#fff'};
+  border: 1px solid #eaeaea;
+
+  &::after {
+    font-weight: 600;
+    content: "${props.joined ? '+1' : 'join'}";
+  }
+
+  &:hover {
+    box-shadow: 0 13px 38px -10px ${colors.primaryBlue};
+  }
+  &:active {
+    box-shadow: none;
+  }
+`
+const JoinButton = styled.button`
+  ${joinButtonStyle};
+`
+const JoinLinkButton = styled(Link)`
+  ${joinButtonStyle};
 `
 function TripCard({
-  title, durations, cost, imgUrl,
+  title, durations, cost, imgUrl, joined,
 }) {
   return (
     <Card>
@@ -75,7 +98,15 @@ function TripCard({
         <Divider />
       </CardBody>
       <CardFooter>
-        <JoinButton>join</JoinButton>
+        <AuthContextConsumer>
+          {({ user }) =>
+            (user != null ? (
+              <JoinButton joined={joined} />
+            ) : (
+              <JoinLinkButton to="/login" />
+            ))
+          }
+        </AuthContextConsumer>
       </CardFooter>
     </Card>
   )
