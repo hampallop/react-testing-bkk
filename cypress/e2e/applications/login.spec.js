@@ -4,13 +4,6 @@ const fakeUser = {
 }
 
 describe('authentication', () => {
-  // beforeEach(() => {
-  //   return cy
-  //     .logout()
-  //     .createNewUser()
-  //     .then(u => (user = u))
-  //     .visit('/')
-  // })
   beforeEach(() => cy.visit('http://localhost:3000/'))
 
   it('should allow existing users to login', () => {
