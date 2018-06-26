@@ -1,45 +1,21 @@
 {
   "name": "react-testing-bkk",
   "version": "1.0.0",
-  "repository": "git@github.com:vannizer/react-testing-bkk.git",
-  "author": "Pallop Chao",
+  "repository": "https://github.com/vannizer/react-testing-bkk.git",
+  "author": "<pallop.chao@gmail.com>",
   "license": "MIT",
-  "private": true,
   "scripts": {
+    "client": "cd client && npm start",
     "server": "json-server --watch server/db.json --port 3001 --middlewares server/middleware.js",
-    "client": "react-app-rewired start",
     "dev": "npm-run-all --parallel --race server client",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test --env=jsdom",
-    "test:e2e": "npm-run-all --parallel --race dev cy:open",
     "cy:open": "cypress open",
-    "eject": "react-scripts eject"
-  },
-  "dependencies": {
-    "emotion": "^9.2.3",
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0",
-    "react-emotion": "^9.2.3",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4",
-    "react-testing-library": "^3.1.4"
+    "cy:run": "cypress run",
+    "test:e2e": "npm-run-all --parallel --race dev cy:open"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.1",
-    "babel-plugin-emotion": "^9.2.0",
     "cypress": "^3.0.1",
     "cypress-testing-library": "^2.2.0",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "eslint": "^4.9.0",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-config-hamcompe": "^1.0.11",
-    "eslint-plugin-cypress": "^2.0.1",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-react": "^7.4.0",
     "json-server": "^0.14.0",
-    "npm-run-all": "^4.1.3",
-    "react-app-rewired": "^1.5.2"
+    "npm-run-all": "^4.1.3"
   }
 }
