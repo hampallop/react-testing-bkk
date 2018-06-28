@@ -4,6 +4,8 @@
   "repository": "https://github.com/vannizer/react-testing-bkk.git",
   "author": "<pallop.chao@gmail.com>",
   "license": "MIT",
+  "private": true,
+  "workspaces": ["client", "server"],
   "scripts": {
     "client": "cd client && npm start",
     "server": "json-server --watch server/db.json --port 3001 --middlewares server/middleware.js",
