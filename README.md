@@ -7,7 +7,7 @@ This project has been built to show the examples of code, related to my talk at 
 Run
 
 ```shell
-yarn
+make all
 ```
 
 I use [yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/) so, there is no need to go to one by one directory and run `yarn`.
