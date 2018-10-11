@@ -23,3 +23,7 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('assertUrl', route => {
+  cy.url().should('eq', `${window.location.origin}${route}`)
+})

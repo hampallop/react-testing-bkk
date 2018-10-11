@@ -1,19 +1,19 @@
-const user = {
-  username: 'rocky',
-  password: 'italian stallion',
-}
+import {generateUserData} from '../../utils'
 
 describe('authentication', () => {
   beforeEach(() => cy.visit('/'))
 
   it('should allow existing users to login', () => {
-    cy.getByText('Login')
+    const user = generateUserData()
+    cy.getByText('Sign up')
       .click()
       .getByLabelText('Username')
       .type(user.username)
       .getByLabelText('Password')
       .type(user.password)
-      .getByText('Login', {selector: 'button'})
+      .getByLabelText('Confirm Password')
+      .type(user.password)
+      .getByText('Sign up', {selector: 'button'})
       .click()
       .assertUrl('/')
 

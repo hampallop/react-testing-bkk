@@ -1,7 +1,4 @@
 {
   "plugins": ["cypress"],
-  "env": {"cypress/globals": true},
-  "rules": {
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
-  }
+  "env": {"cypress/globals": true}
 }
